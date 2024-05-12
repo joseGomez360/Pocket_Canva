@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- activity_main.xml -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Sección superior con tres botones con imágenes -->
+    <LinearLayout
+        android:id="@+id/top_buttons_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <!-- Botón 1 -->
+        <ImageButton
+            android:id="@+id/button1"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/button1_image"
+            android:layout_weight="1" />
+
+        <!-- Botón 2 (más grande) -->
+        <ImageButton
+            android:id="@+id/button2"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:scaleType="fitCenter"
+            android:layout_weight="2"
+            android:src="@drawable/button2_image" />
+
+        <!-- Botón 3 -->
+        <ImageButton
+            android:id="@+id/button3"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/button3_image"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <!-- Sección para filtrar tareas -->
+    <LinearLayout
+        android:id="@+id/filter_buttons_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_below="@id/top_buttons_layout">
+
+        <!-- Botones para filtrar tareas -->
+        <!-- (Agregar botones con gradientes de gris a negro) -->
+
+    </LinearLayout>
+
+    <!-- Panel desplazable para las tareas -->
+    <ScrollView
+        android:id="@+id/tasks_scrollview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/filter_buttons_layout">
+
+        <LinearLayout
+            android:id="@+id/tasks_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <!-- Aquí se agregarán dinámicamente las vistas de las tareas -->
+        </LinearLayout>
+    </ScrollView>
+
+
+    <!-- Botones para acciones CRUD -->
+    <LinearLayout
+        android:id="@+id/crud_buttons_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_below="@id/tasks_scrollview">
+
+        <!-- Botón para crear tarea -->
+        <Button
+            android:id="@+id/create_button"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:text="Crear Tarea"
+            android:layout_margin="8dp"/>
+
+        <!-- Botón para modificar tarea -->
+        <Button
+            android:id="@+id/modify_button"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="Modificar Tarea"
+            android:layout_margin="8dp"/>
+
+        <!-- Botón para eliminar tarea -->
+        <Button
+            android:id="@+id/delete_button"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:text="Eliminar Tarea"
+            android:layout_margin="8dp"/>
+    </LinearLayout>
+
+
+</RelativeLayout>
