@@ -7,6 +7,8 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="colorPending">#FFC107</color> <!-- Color para tareas pendientes -->
-    <color name="colorCompleted">#4CAF50</color> <!-- Color para tareas completadas -->
+    <color name="colorPending">#FFA500</color>
+    <color name="colorInReview">#FFD700</color>
+    <color name="colorCompleted">#008000</color>
+    <color name="colorFinalized">#0000FF</color>
 </resources>

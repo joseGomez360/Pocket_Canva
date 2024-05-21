@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- activity_main.xml -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -51,8 +50,33 @@
         android:layout_below="@id/top_buttons_layout">
 
         <!-- Botones para filtrar tareas -->
-        <!-- (Agregar botones con gradientes de gris a negro) -->
+        <Button
+            android:id="@+id/filter_pending_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pendiente"
+            android:layout_margin="4dp" />
 
+        <Button
+            android:id="@+id/filter_in_review_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="En Revisión"
+            android:layout_margin="4dp" />
+
+        <Button
+            android:id="@+id/filter_completed_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Completada"
+            android:layout_margin="4dp" />
+
+        <Button
+            android:id="@+id/filter_finalized_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Finalizado"
+            android:layout_margin="4dp" />
     </LinearLayout>
 
     <!-- Panel desplazable para las tareas -->
@@ -70,7 +94,6 @@
             <!-- Aquí se agregarán dinámicamente las vistas de las tareas -->
         </LinearLayout>
     </ScrollView>
-
 
     <!-- Botones para acciones CRUD -->
     <LinearLayout
@@ -105,6 +128,4 @@
             android:text="Eliminar Tarea"
             android:layout_margin="8dp"/>
     </LinearLayout>
-
-
 </RelativeLayout>

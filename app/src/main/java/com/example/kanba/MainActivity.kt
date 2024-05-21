@@ -1,5 +1,4 @@
 package com.example.kanba
-
 import android.os.Bundle
 import android.widget.Button
 import android.widget.LinearLayout
@@ -22,37 +21,7 @@ class MainActivity : AppCompatActivity() {
         // Mostrar las tareas en el contenedor
         val tasksContainer: LinearLayout = findViewById(R.id.tasks_container)
         for (task in tasksList) {
-            val taskView = layoutInflater.inflate(R.layout.task_item, null)
-            val taskTextView: TextView = taskView.findViewById(R.id.task_text_view)
-            val changeStateButton: Button = taskView.findViewById(R.id.change_state_button)
-
-            taskTextView.text = task.text
-
-            // Cambiar el color de fondo del botón basado en el estado de la tarea
-            if (task.state == "Pendiente") {
-                changeStateButton.setBackgroundColor(ContextCompat.getColor(this, R.color.colorPending))
-            } else {
-                changeStateButton.setBackgroundColor(ContextCompat.getColor(this, R.color.colorCompleted))
-            }
-
-            changeStateButton.text = task.state
-            changeStateButton.setOnClickListener {
-                // Cambiar el estado de la tarea al hacer clic en el botón
-                if (task.state == "Pendiente") {
-                    task.state = "Completada"
-                } else {
-                    task.state = "Pendiente"
-                }
-                changeStateButton.text = task.state
-                // Cambiar el color de fondo del botón después de cambiar el estado
-                if (task.state == "Pendiente") {
-                    changeStateButton.setBackgroundColor(ContextCompat.getColor(this, R.color.colorPending))
-                } else {
-                    changeStateButton.setBackgroundColor(ContextCompat.getColor(this, R.color.colorCompleted))
-                }
-            }
-
-            tasksContainer.addView(taskView)
+            addTaskToContainer(task, tasksContainer)
         }
 
         // Manejar clics en los botones de CRUD
@@ -95,6 +64,16 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        // Manejar clics en los botones de filtro
+        val filterPendingButton: Button = findViewById(R.id.filter_pending_button)
+        val filterInReviewButton: Button = findViewById(R.id.filter_in_review_button)
+        val filterCompletedButton: Button = findViewById(R.id.filter_completed_button)
+        val filterFinalizedButton: Button = findViewById(R.id.filter_finalized_button)
+
+        filterPendingButton.setOnClickListener { filterTasks("Pendiente", tasksContainer) }
+        filterInReviewButton.setOnClickListener { filterTasks("En Revisión", tasksContainer) }
+        filterCompletedButton.setOnClickListener { filterTasks("Completada", tasksContainer) }
+        filterFinalizedButton.setOnClickListener { filterTasks("Finalizado", tasksContainer) }
     }
 
     private fun addTaskToContainer(task: Task, container: LinearLayout) {
@@ -103,31 +82,40 @@ class MainActivity : AppCompatActivity() {
         val changeStateButton: Button = taskView.findViewById(R.id.change_state_button)
 
         taskTextView.text = task.text
-
-        // Cambiar el color de fondo del botón basado en el estado de la tarea
-        if (task.state == "Pendiente") {
-            changeStateButton.setBackgroundColor(ContextCompat.getColor(this, R.color.colorPending))
-        } else {
-            changeStateButton.setBackgroundColor(ContextCompat.getColor(this, R.color.colorCompleted))
-        }
+        updateButtonState(changeStateButton, task.state)
 
         changeStateButton.text = task.state
         changeStateButton.setOnClickListener {
             // Cambiar el estado de la tarea al hacer clic en el botón
-            if (task.state == "Pendiente") {
-                task.state = "Completada"
-            } else {
-                task.state = "Pendiente"
+            task.state = when (task.state) {
+                "Pendiente" -> "En Revisión"
+                "En Revisión" -> "Completada"
+                "Completada" -> "Finalizado"
+                else -> "Pendiente"
             }
             changeStateButton.text = task.state
-            // Cambiar el color de fondo del botón después de cambiar el estado
-            if (task.state == "Pendiente") {
-                changeStateButton.setBackgroundColor(ContextCompat.getColor(this, R.color.colorPending))
-            } else {
-                changeStateButton.setBackgroundColor(ContextCompat.getColor(this, R.color.colorCompleted))
-            }
+            updateButtonState(changeStateButton, task.state)
         }
 
         container.addView(taskView)
+    }
+
+    private fun updateButtonState(button: Button, state: String) {
+        val color = when (state) {
+            "Pendiente" -> R.color.colorPending
+            "En Revisión" -> R.color.colorInReview
+            "Completada" -> R.color.colorCompleted
+            "Finalizado" -> R.color.colorFinalized
+            else -> R.color.colorPending
+        }
+        button.setBackgroundColor(ContextCompat.getColor(this, color))
+    }
+
+    private fun filterTasks(state: String, container: LinearLayout) {
+        container.removeAllViews()
+        val filteredTasks = tasksList.filter { it.state == state }
+        for (task in filteredTasks) {
+            addTaskToContainer(task, container)
+        }
     }
 }
