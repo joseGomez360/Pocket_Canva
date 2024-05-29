@@ -1,10 +1,12 @@
 package com.example.kanba
-
 import EditTaskDialogFragment
 import android.os.Bundle
 import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.LinearLayout
+import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -72,18 +74,39 @@ class MainActivity : AppCompatActivity(), CreateTaskDialogFragment.CreateTaskLis
             }
         }
 
-        // Manejar clics en los botones de filtro
-        val filterPendingButton: Button = findViewById(R.id.filter_pending_button)
-        val filterInReviewButton: Button = findViewById(R.id.filter_in_review_button)
-        val filterCompletedButton: Button = findViewById(R.id.filter_completed_button)
-        val filterFinalizedButton: Button = findViewById(R.id.filter_finalized_button)
+        // Obtener referencias al Spinner y al botón de restablecer filtro
+        val filterSpinner: Spinner = findViewById(R.id.filter_spinner)
+        val resetFilterButton: Button = findViewById(R.id.reset_filter_button)
 
-        filterPendingButton.setOnClickListener { filterTasks("Pendiente", tasksContainer) }
-        filterInReviewButton.setOnClickListener { filterTasks("En Revisión", tasksContainer) }
-        filterCompletedButton.setOnClickListener { filterTasks("Completada", tasksContainer) }
-        filterFinalizedButton.setOnClickListener { filterTasks("Finalizado", tasksContainer) }
+        // Crear un ArrayAdapter con las opciones de filtrado
+        val adapter = ArrayAdapter.createFromResource(
+            this,
+            R.array.filter_options,
+            android.R.layout.simple_spinner_item
+        )
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+
+        // Establecer el adaptador en el Spinner
+        filterSpinner.adapter = adapter
+
+        // Manejar el evento de selección del Spinner
+        filterSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val selectedItem = parent?.getItemAtPosition(position).toString()
+                filterTasks(selectedItem, tasksContainer)
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                // No hacer nada cuando no se selecciona nada
+            }
+        }
+
+        // Manejar clic en el botón de restablecer filtro
+        resetFilterButton.setOnClickListener {
+            // Mostrar todas las tareas
+            filterTasks("Todas", tasksContainer)
+        }
     }
-
     private fun addTaskToContainer(task: Task, container: LinearLayout) {
         val taskView = layoutInflater.inflate(R.layout.task_item, null)
         val taskTextView: TextView = taskView.findViewById(R.id.task_text_view)
@@ -129,10 +152,13 @@ class MainActivity : AppCompatActivity(), CreateTaskDialogFragment.CreateTaskLis
         }
         button.setBackgroundColor(ContextCompat.getColor(this, color))
     }
-
     private fun filterTasks(state: String, container: LinearLayout) {
         container.removeAllViews()
-        val filteredTasks = tasksList.filter { it.state == state }
+        val filteredTasks = if (state == "Todas") {
+            tasksList
+        } else {
+            tasksList.filter { it.state == state }
+        }
         for (task in filteredTasks) {
             addTaskToContainer(task, container)
         }

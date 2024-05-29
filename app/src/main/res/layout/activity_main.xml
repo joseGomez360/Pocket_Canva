@@ -39,7 +39,6 @@
             android:src="@drawable/button3_image"
             android:layout_weight="1" />
     </LinearLayout>
-
     <!-- Sección para filtrar tareas -->
     <LinearLayout
         android:id="@+id/filter_buttons_layout"
@@ -49,35 +48,24 @@
         android:gravity="center"
         android:layout_below="@id/top_buttons_layout">
 
-        <!-- Botones para filtrar tareas -->
-        <Button
-            android:id="@+id/filter_pending_button"
-            android:layout_width="wrap_content"
+        <!-- Spinner para filtrar tareas -->
+        <Spinner
+            android:id="@+id/filter_spinner"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Pendiente"
+            android:layout_weight="1"
             android:layout_margin="4dp" />
 
+        <!-- Botón para restablecer el filtro -->
         <Button
-            android:id="@+id/filter_in_review_button"
+            android:id="@+id/reset_filter_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="En Revisión"
-            android:layout_margin="4dp" />
-
-        <Button
-            android:id="@+id/filter_completed_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Completada"
-            android:layout_margin="4dp" />
-
-        <Button
-            android:id="@+id/filter_finalized_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Finalizado"
+            android:text="Todas"
             android:layout_margin="4dp" />
     </LinearLayout>
+
+
 
     <!-- Panel desplazable para las tareas -->
     <ScrollView
