@@ -1,0 +1,10 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:shape="rectangle"
+    tools:ignore="ExtraText">
+    <solid android:color="@android:color/transparent" /> <!-- Color de fondo transparente -->
+    <stroke
+        android:width="2dp"
+    android:color="@color/black" /> <!-- Color del borde -->
+    <corners android:radius="8dp" /> <!-- Radio de las esquinas en dp -->
+</shape>

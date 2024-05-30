@@ -1,10 +1,13 @@
 package com.example.kanba
 import EditTaskDialogFragment
+import MenuActivity
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.Spinner
 import android.widget.TextView
@@ -24,6 +27,11 @@ class MainActivity : AppCompatActivity(), CreateTaskDialogFragment.CreateTaskLis
         tasksList.add(Task(text = "Tarea 1", state = "Pendiente"))
         tasksList.add(Task(text = "Tarea 2", state = "Completada"))
 
+        val button2: ImageButton = findViewById(R.id.button2)
+        button2.setOnClickListener {
+            val intent = Intent(this, MenuActivity::class.java)
+            startActivity(intent)
+        }
         // Mostrar las tareas en el contenedor
         val tasksContainer: LinearLayout = findViewById(R.id.tasks_container)
         for (task in tasksList) {
