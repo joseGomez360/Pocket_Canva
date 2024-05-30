@@ -1,4 +1,5 @@
 package com.example.kanba
+
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -32,6 +33,12 @@ class LoginActivity : AppCompatActivity() {
             } else {
                 Toast.makeText(this, "Usuario o contraseña incorrectos", Toast.LENGTH_SHORT).show()
             }
+        }
+
+        val registerButton: Button = findViewById(R.id.register_button)
+        registerButton.setOnClickListener {
+            val intent = Intent(this, RegisterActivity::class.java)
+            startActivity(intent)
         }
     }
 }
