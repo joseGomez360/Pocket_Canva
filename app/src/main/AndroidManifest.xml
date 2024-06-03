@@ -15,16 +15,20 @@
         <!-- Declaración de la actividad MenuActivity -->
         <activity
             android:name=".MenuActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:label="Menu"
+            />
 
         <!-- Declaraciones de otras actividades -->
         <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:label="Tablon 1">
         </activity>
         <activity
             android:name=".LoginActivity"
-            android:exported="true">
+            android:exported="true"
+            android:label="Iniciar Sesión">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -32,7 +36,8 @@
         </activity>
         <activity
             android:name=".RegisterActivity"
-            android:exported="true">
+            android:exported="true"
+            android:label="Registro">
         </activity>
 
     </application>

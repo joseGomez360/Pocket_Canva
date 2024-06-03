@@ -6,55 +6,13 @@
     android:padding="16dp"
     tools:context=".MenuActivity">
 
-    <!-- Recuadro para Tablero 1 -->
-    <RelativeLayout
-        android:id="@+id/tablero1_container"
+    <!-- Contenedor para los tableros -->
+    <LinearLayout
+        android:id="@+id/boards_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/board_border">
-
-        <TextView
-            android:id="@+id/tablero1_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Tablero 1"
-            android:layout_margin="16dp"/>
-
-        <Button
-            android:id="@+id/tablero1_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Ir Tablero 1"
-            android:layout_below="@id/tablero1_text"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="16dp"/>
-    </RelativeLayout>
-
-    <!-- Recuadro para Tablero 2 -->
-    <RelativeLayout
-        android:id="@+id/tablero2_container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tablero1_container"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/board_border">
-
-        <TextView
-            android:id="@+id/tablero2_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Tablero 2"
-            android:layout_margin="16dp"/>
-
-        <Button
-            android:id="@+id/tablero2_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Ir Tablero 2"
-            android:layout_below="@id/tablero2_text"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="16dp"/>
-    </RelativeLayout>
+        android:orientation="vertical"
+        android:layout_marginBottom="16dp" />
 
     <!-- Botón para crear un nuevo tablero -->
     <Button
@@ -62,9 +20,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Crear nuevo tablero"
-        android:layout_below="@id/tablero2_container"
-        android:layout_marginTop="16dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_below="@id/boards_container"
+        android:layout_marginTop="16dp" />
 
 </RelativeLayout>
+
