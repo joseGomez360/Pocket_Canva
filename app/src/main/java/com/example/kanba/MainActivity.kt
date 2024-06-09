@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity(), CreateTaskDialogFragment.CreateTaskLis
 
         // Agregar algunas tareas de ejemplo
         tasksList.add(Task(text = "Tarea 1", state = "Pendiente"))
-        tasksList.add(Task(text = "Tarea 2", state = "Completada"))
+        tasksList.add(Task(text = "Tarea 2", state = "Pendiente"))
 
         val button2: ImageButton = findViewById(R.id.button2)
         button2.setOnClickListener {
@@ -114,6 +114,7 @@ class MainActivity : AppCompatActivity(), CreateTaskDialogFragment.CreateTaskLis
             filterTasks("Todas", tasksContainer)
         }
     }
+
     private fun addTaskToContainer(task: Task, container: LinearLayout) {
         val taskView = layoutInflater.inflate(R.layout.task_item, null)
         val taskTextView: TextView = taskView.findViewById(R.id.task_text_view)
@@ -134,8 +135,24 @@ class MainActivity : AppCompatActivity(), CreateTaskDialogFragment.CreateTaskLis
                 "Completada" -> "Finalizado"
                 else -> "Pendiente"
             }
+
             changeStateButton.text = task.state
-            updateButtonState(changeStateButton, task.state)
+
+            // Ajustar el tamaño del botón y el texto según el estado
+            val layoutParams = changeStateButton.layoutParams as LinearLayout.LayoutParams
+            when (task.state) {
+                "Completada" -> {
+                    layoutParams.height = 125 // Ajustar altura para "Completada"
+                    changeStateButton.textSize = 11f // Ajustar tamaño del texto
+                }
+                else -> {
+                    layoutParams.height = LinearLayout.LayoutParams.WRAP_CONTENT
+                    changeStateButton.textSize = 12f // Tamaño del texto predeterminado
+                }
+            }
+            changeStateButton.layoutParams = layoutParams
+
+            updateButtonState(changeStateButton, task.state) // Llamar a updateButtonState() aquí
         }
 
         selectButton.setOnClickListener {
@@ -150,15 +167,17 @@ class MainActivity : AppCompatActivity(), CreateTaskDialogFragment.CreateTaskLis
     }
 
     private fun updateButtonState(button: Button, state: String) {
-        val color = when (state) {
+        val colorResId = when (state) {
             "Pendiente" -> R.color.colorPending
             "En Revisión" -> R.color.colorInReview
             "Completada" -> R.color.colorCompleted
             "Finalizado" -> R.color.colorFinalized
             else -> R.color.colorPending
         }
-        button.setBackgroundColor(ContextCompat.getColor(this, color))
+        button.setBackgroundColor(ContextCompat.getColor(this, colorResId))
     }
+
+
     private fun filterTasks(state: String, container: LinearLayout) {
         container.removeAllViews()
         val filteredTasks = if (state == "Todas") {
