@@ -1,8 +1,8 @@
+<!-- res/drawable/select_button_normal.xml -->
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">
     <solid android:color="#2196F3"/> <!-- Azul -->
     <corners android:radius="8dp"/>
 </shape>
-
 
 

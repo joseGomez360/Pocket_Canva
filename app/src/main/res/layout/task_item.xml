@@ -21,14 +21,13 @@
         android:text="Change State"
         android:textSize="14sp"
         android:padding="8dp"
-        android:background="@drawable/select_button_normal"
         android:textColor="#FFFFFF"/>
 
     <Button
         android:id="@+id/select_button"
         android:layout_width="100dp"
-        android:background="@drawable/select_button_background"
         android:layout_height="wrap_content"
+        android:background="@drawable/select_button_background"
         android:text="Select"
         android:textSize="14sp"
         android:padding="8dp"
