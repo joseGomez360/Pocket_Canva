@@ -1,0 +1,6 @@
+<!-- res/drawable/select_button_default_background.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="#CCCCCC"/> <!-- Color de fondo por defecto -->
+    <corners android:radius="8dp"/>
+</shape>

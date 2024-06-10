@@ -1,4 +1,5 @@
 package com.example.kanba
+
 import EditTaskDialogFragment
 import android.content.Intent
 import android.os.Bundle
@@ -37,7 +38,7 @@ class MainActivity : AppCompatActivity(), CreateTaskDialogFragment.CreateTaskLis
             addTaskToContainer(task, tasksContainer)
         }
 
-        // Manejar clics en los botones de CRUD
+// Manejar clics en los botones de CRUD
         val createButton: Button = findViewById(R.id.create_button)
         val modifyButton: Button = findViewById(R.id.modify_button)
         val deleteButton: Button = findViewById(R.id.delete_button)
@@ -49,19 +50,23 @@ class MainActivity : AppCompatActivity(), CreateTaskDialogFragment.CreateTaskLis
         }
 
         modifyButton.setOnClickListener {
-            // Verificar si hay alguna tarea seleccionada para modificar
-            if (selectedTaskView != null) {
-                val selectedTask = selectedTaskView?.tag as Task
-                val dialog = EditTaskDialogFragment(object : EditTaskDialogFragment.EditTaskListener {
-                    override fun onTaskEdited(newTaskText: String) {
-                        // Actualizar el texto de la tarea seleccionada
-                        selectedTask.text = newTaskText
-                        // Refrescar la vista
-                        selectedTaskView?.findViewById<TextView>(R.id.task_text_view)?.text = newTaskText
-                        Toast.makeText(this@MainActivity, "Tarea modificada: $newTaskText", Toast.LENGTH_SHORT).show()
-                    }
-                }, selectedTask.text)
-                dialog.show(supportFragmentManager, "EditTaskDialog")
+            // Verificar si la actividad está en primer plano y hay alguna tarea seleccionada para modificar
+            if (!isFinishing && selectedTaskView != null) {
+                val selectedTask = selectedTaskView?.tag as? Task
+                if (selectedTask != null) {
+                    val dialog = EditTaskDialogFragment(object : EditTaskDialogFragment.EditTaskListener {
+                        override fun onTaskEdited(newTaskText: String) {
+                            // Actualizar el texto de la tarea seleccionada
+                            selectedTask.text = newTaskText
+                            // Refrescar la vista
+                            selectedTaskView?.findViewById<TextView>(R.id.task_text_view)?.text = newTaskText
+                            Toast.makeText(this@MainActivity, "Tarea modificada: $newTaskText", Toast.LENGTH_SHORT).show()
+                        }
+                    }, selectedTask.text)
+                    dialog.show(supportFragmentManager, "EditTaskDialog")
+                } else {
+                    Toast.makeText(this, "La tarea seleccionada no es válida", Toast.LENGTH_SHORT).show()
+                }
             } else {
                 Toast.makeText(this, "Por favor, seleccione una tarea para modificar", Toast.LENGTH_SHORT).show()
             }
@@ -116,12 +121,10 @@ class MainActivity : AppCompatActivity(), CreateTaskDialogFragment.CreateTaskLis
     }
 
     private fun addTaskToContainer(task: Task, container: LinearLayout) {
-        val taskView = layoutInflater.inflate(R.layout.task_item, null)
+        val taskView = layoutInflater.inflate(R.layout.task_item, container, false)
         val taskTextView: TextView = taskView.findViewById(R.id.task_text_view)
         val changeStateButton: Button = taskView.findViewById(R.id.change_state_button)
         val selectButton: Button = taskView.findViewById(R.id.select_button)
-
-        taskView.tag = task
 
         taskTextView.text = task.text
         updateButtonState(changeStateButton, task.state)
@@ -161,11 +164,14 @@ class MainActivity : AppCompatActivity(), CreateTaskDialogFragment.CreateTaskLis
             // Marcar esta tarea como seleccionada
             selectButton.text = "Selected"
             selectedTaskView = taskView
+            // Almacenar la tarea asociada a esta vista en la propiedad 'tag'
+            selectedTaskView?.tag = task
+            //Cambiar el fondo del boton de la tarea seleccionada
+            selectButton.setBackgroundColor(ContextCompat.getColor(taskView.context, R.color.white))
         }
 
         container.addView(taskView)
     }
-
 
     private fun updateButtonState(button: Button, state: String) {
         val colorResId = when (state) {
@@ -204,5 +210,5 @@ class MainActivity : AppCompatActivity(), CreateTaskDialogFragment.CreateTaskLis
         // Este método se llama cuando se edita una tarea en el diálogo de edición
         // Aquí no necesitamos hacer nada ya que la tarea se actualiza en el método
         // onClick del botón "Aceptar" en el diálogo de edición
-    }
-}
+    }}
+

@@ -4,10 +4,12 @@
     <color name="colorCompleted">#4CAF50</color> <!-- Color para Completada -->
     <color name="colorFinalized">#9C27B0</color> <!-- Color para Finalizado -->
     <color name="purple_200">#BB86FC</color>
-    <color name="purple_500">#6200EE</color>
+    <color name="purple_500">#0066FF</color>
     <color name="purple_700">#3700B3</color>
     <color name="teal_200">#03DAC5</color>
     <color name="teal_700">#018786</color>
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
+    <color name="default_color">#2196F3</color> <!-- Azul por defecto -->
+    <color name="selected_color">#4CAF50</color> <!-- Verde para seleccionado -->
 </resources>

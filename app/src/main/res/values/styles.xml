@@ -1,0 +1,13 @@
+<resources>
+    <!-- Otros estilos aquí -->
+
+    <!-- Estilo personalizado para el botón de selección -->
+    <style name="SelectButtonStyle" parent="Widget.AppCompat.Button">
+        <!-- Cambios específicos para el botón de selección -->
+        <item name="android:background">@drawable/select_button_background</item>
+        <item name="android:textColor">#FFFFFF</item> <!-- Color del texto blanco -->
+        <item name="android:textSize">14sp</item> <!-- Tamaño del texto -->
+        <item name="android:padding">8dp</item> <!-- Padding del botón -->
+        <!-- Otros atributos de estilo si es necesario -->
+    </style>
+</resources>
